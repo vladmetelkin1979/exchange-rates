@@ -75,13 +75,7 @@ Converter.propTypes = {
     SearchValute: PropTypes.func
 }
 
-const mapStateToProps = (state, ownProps) => {
-    const arrayList = []
-    for (const key in ownProps) {
-        if (ownProps.hasOwnProperty(key)) {
-            arrayList.push(ownProps[key])
-        }
-    }
+const mapStateToProps = (state) => {    
     return {
         getInput: state.convertation.input,
         firstSelect: state.convertation.firstSelect,
