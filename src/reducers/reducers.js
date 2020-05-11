@@ -1,3 +1,5 @@
+// Можно было создавать шаблон с встроенной поддержеой redux
+// https://redux-toolkit.js.org/introduction/quick-start
 import { combineReducers } from 'redux'
 import {
   GET_VALUE_API, ERROR_GET_API,

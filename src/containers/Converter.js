@@ -23,8 +23,11 @@ class Converter extends React.Component {
         })        
     }
 
+    // Можно переписать компонент на функиональный и использовать хуки для этого действия
+    // https://reactjs.org/docs/hooks-intro.html
     componentDidMount() {
         const { dispatch } = this.props        
+        // Выше была деструкция почему бы там еще и list не взять 
         dispatch(firstSelect(SearchValute('Доллар США', this.props.list)))        
         dispatch(secondSelect(SearchValute('Российских рублей', this.props.list)))
         dispatch(count())
@@ -44,6 +47,7 @@ class Converter extends React.Component {
     }
 
     changeFirstOption(e) {
+        // preventDefault не уверен что тут нужен
         e.preventDefault()
         const { dispatch } = this.props
         dispatch(firstSelect(SearchValute(e.target.value, this.props.list)))
@@ -62,6 +66,7 @@ class Converter extends React.Component {
             <CreateSelect list={this.props.list}
                 changeFirstOption={this.changeFirstOption}
                 changeSecondOption={this.changeSecondOption} />
+            {/* Очень сложно. Непонятно что происходит */}
             <h3>{typeof this.props.result !== 'number' || Number.isNaN(this.props.result) || this.props.getInput === '' ? 'введите число' : this.props.result.toFixed(2) + ' ' + this.props.secondSelect.CharCode}</h3>
         </div>
     }
