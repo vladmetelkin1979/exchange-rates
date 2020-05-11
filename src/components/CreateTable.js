@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+// Имя без Create
 function CreateTable(props) {
+    // Тут скорее бы деструкция использовалась
     const name = props.name,
         code = props.code,
         value = props.value,

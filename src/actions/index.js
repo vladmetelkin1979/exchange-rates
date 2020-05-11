@@ -7,6 +7,7 @@ export const RESULT = 'RESULT'
 
 // get API
 
+// Все функции в этом файле обычно бы написали стрелочными
 export function beforeRequestApi(load) {
   return {
     type: GET_VALUE_API,
@@ -25,6 +26,7 @@ export default function getRequestApi() {
   return function (dispatch) {
     return fetch('https://www.cbr-xml-daily.ru/daily_json.js')
       .then(function (response) {
+        // Тут вроде можно использовать свойство response.ok
         if (response.status >= 200 && response.status < 300) {
           return response
         } else {
@@ -49,6 +51,8 @@ export default function getRequestApi() {
         dispatch(beforeRequestApi(API))
       })
       .catch(function (text) {
+        // По идее не надло в сторе хранить ошибку в таком красивом виде чтобы выводить
+        // Надо просто сохранить ошибку в стор а о том как ее вывести должны компоненты заботится
         return dispatch(errorRequestApi('Ошибка в получении данных: ' + text.message))
       })
   }
@@ -86,9 +90,12 @@ export function result(result) {
 
 //count 
 
+// Обычно так не пишут. Пишут const на каждой строчке 
 const SUM_OF_BASIC = 1000, // sum of basic valute
   MULTIPLICITY = 100
 
+// результат getState() можно сохранить в константу
+// Очень сложная функция и непонятно что делает надо упростить чтобы человеку сразу было понятно что тут к чему
 export function count() {
   return (dispatch, getState) => {
     if (getState().convertation.firstSelect.Name === 'Российских рублей') {

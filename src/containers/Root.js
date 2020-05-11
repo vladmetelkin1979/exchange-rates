@@ -5,6 +5,7 @@ import Api from './Api'
 
 const store = configureStore()
 
+// Тут можно функциональный компонент использовать
 export default class Root extends React.Component {
   render() {          
     return (

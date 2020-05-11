@@ -6,6 +6,7 @@ function CreateInput(props) {
         value = props.defaultValue
     return (
         <div>
+            {/* Почему через defaultValue мне кажется тут через value нужно */}
             <input defaultValue={value} type='text' onChange={changeInput}></input>
         </div>
     )
