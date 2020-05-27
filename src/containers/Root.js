@@ -5,7 +5,7 @@ import Api from './Api'
 
 const store = configureStore()
 
-export default function Root() {
+export const Root = () => {
   return (
     <Provider store={store}>
       <Api />

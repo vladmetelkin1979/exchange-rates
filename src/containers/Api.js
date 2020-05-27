@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import Wrapper from '../components/Wrapper'
+import { readyApi } from '../actions'
+
 
 const mapStateToProps = state => ({
     date: state.readyApi.date,
@@ -9,13 +10,33 @@ const mapStateToProps = state => ({
     valutes: state.readyApi.valutes
 })
 
-Wrapper.propTypes = {
-    date: PropTypes.string,
-    previousDate: PropTypes.string,
-    timestamp: PropTypes.string,
-    valutes: PropTypes.array
-}
+const mapDispatchToProps = dispatch => ({
+    getApi: () => {
+        fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+            .then((response) => {
+                if (response.ok === true) {
+                    return response
+                } else {
+                    let error = new Error(response.statusText)
+                    error.response = response
+                    throw error
+                }
+            })
+            .then((response) => {
+                if (typeof response !== 'object') {
+                    let error = new Error('Получен недопустимый формат данных')
+                    throw error
+                }
+                return response;
+            })
+            .then((response) => {
+                return response.json()
+            })
+            .then((API) => {
+                dispatch(readyApi(API))
+            })
+    }
+})
 
-
-export default connect(mapStateToProps)(Wrapper)
+export default connect(mapStateToProps, mapDispatchToProps)(Wrapper)
 

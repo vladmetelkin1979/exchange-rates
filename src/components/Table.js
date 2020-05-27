@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Table(props) {
+const Table = ({ date, previousDate, timestamp, valutes }) => {
     return (
         <div>
-            <h5 style={{ marginTop: '2em' }}>Курс на: {props.date}</h5>
-            <h5>Предыдущий срез на: {props.previousDate}</h5>
-            <h5>Отметка времени: {props.timestamp}</h5>
+            <h5 style={{ marginTop: '2em' }}>Курс на: {date}</h5>
+            <h5>Предыдущий срез на: {previousDate}</h5>
+            <h5>Отметка времени: {timestamp}</h5>
             <table>
                 <thead>
                     <tr>
@@ -13,7 +13,7 @@ function Table(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.valutes.map((prop) => {
+                    {valutes.map((prop) => {
                         return <tr key={prop.ID}>
                             <td>{prop.CharCode}</td><td>{prop.Nominal}</td><td>{prop.Name}</td><td>{prop.Value.toFixed(2)}</td>
                         </tr>
