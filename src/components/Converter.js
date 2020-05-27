@@ -63,7 +63,6 @@ class Converter extends React.Component {
           })}
         </select>
         <h3>
-
           {/* validation result after entering into input */}
           {typeof this.props.result !== 'number'
             || Number.isNaN(this.props.result)
@@ -71,7 +70,6 @@ class Converter extends React.Component {
             'введите число'
             :
             this.props.result.toFixed(2) + ' ' + this.props.secondSelect.CharCode}
-
         </h3>
       </div>
     )
