@@ -5,12 +5,10 @@ import Api from './Api'
 
 const store = configureStore()
 
-export default class Root extends React.Component {
-  render() {          
-    return (
-      <Provider store={store}>                 
-        <Api />                  
-      </Provider>
-    )
-  }
+export default function Root() {
+  return (
+    <Provider store={store}>
+      <Api />
+    </Provider>
+  )
 }

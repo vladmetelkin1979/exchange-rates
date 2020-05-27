@@ -1,26 +1,25 @@
 import { combineReducers } from 'redux'
 import {
-  GET_VALUE_API, ERROR_GET_API,
+  initStateForSelects,
+  GET_VALUE_API, 
   SET_INPUT, FIRST_SELECT, SECOND_SELECT, RESULT
 } from './../actions'
 
-function requestApi(state = {}, action) {
+function readyApi(state = {}, action) {
   switch (action.type) {
     case GET_VALUE_API:
-      return { ...state, getload: action.load }
-    case ERROR_GET_API:
-      return action.load
+      return { ...state, 
+        date: action.date,
+        previousDate: action.previousDate,
+        timestamp: action.timestamp,
+        valutes: action.valutes
+      }    
     default:
       return state
   }
 }
 
-function convertation(state = {  
-  input: 1,
-  firstSelect: {},
-  secondSelect: {},
-  result: 0  
-}, action) { 
+function convertation(state = initStateForSelects, action) {  
   switch (action.type) {
     case SET_INPUT:     
       return {...state, input: action.input}
@@ -35,6 +34,6 @@ function convertation(state = {
   }
 }
 
-const rootReducer = combineReducers({ requestApi, convertation })
+const rootReducer = combineReducers({ readyApi, convertation })
 
 export default rootReducer
