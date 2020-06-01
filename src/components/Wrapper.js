@@ -4,11 +4,16 @@ import Converter from '../containers/Converter'
 import Table from './Table'
 
 class Wrapper extends React.Component {
+    // Можно использовать React hooks и не писать компоненты классы
     componentDidMount() {
         const { dispatch } = this.props
         dispatch(getRequestApi())
     }
-    render() {        
+    render() {
+        // Обычно сначала получают все данные а потом просто их исползуют. Чтобы не писать через 2 точки:
+        // const { date, previousDate, timestamp, valutes } = this.props;
+
+        // Можно просто: this.props.date === undefined или !this.props.date
         if (typeof this.props.date === 'undefined') {
             return (
                 <div>
