@@ -56,7 +56,8 @@ export const readyApi = (load) => {
 export default function getRequestApi() {
   return function (dispatch) {
     return fetch('https://www.cbr-xml-daily.ru/daily_json.js')
-      .then(function (response) {
+    // Тут обычно бы использоыали стрелочную функцию  
+    .then(function (response) {
         if (response.ok === true) {
           return response
         } else {
@@ -65,6 +66,7 @@ export default function getRequestApi() {
           throw error
         }
       })
+      // Тут обычно бы использоыали стрелочную функцию
       .then(function (response) {
         if (typeof response !== 'object') {
           let error = new Error('Получен недопустимый формат данных')
@@ -73,9 +75,12 @@ export default function getRequestApi() {
         return response;
       })
       .then(function (response) {
+        // Можно просто return response.json()
+        // или всю функию стрелочной сделать: response => response.json()
         const API = response.json()
         return API
       })
+      // Тут обычно бы использоыали стрелочную функцию
       .then(function (API) {
         dispatch(readyApi(API))
       })
@@ -145,15 +150,19 @@ export const result = (result) => ({
 const SUM_OF_BASIC = 1000
 const MULTIPLICITY = 100
 
+// Описание функции больше чем сама функция. Думаю можно еще переписать чтобы без описания все было понятно.
 export function count() {
   return (dispatch, getState) => {
     // get states for counting   
+    // Можно один раз получить стейт и его использовать дальше.
     const { Name: firstSelectName, Value: firstValue, Nominal: firstNominal } = getState().convertation.firstSelect
     const { Name: secondSelectName, Value: secondValue, Nominal: secondNominal } = getState().convertation.secondSelect
     const input = parseFloat(getState().convertation.input)
 
+    // 'Российских рублей' лучше вынести в константу. Встречается 4 раза в этом файле
     if (firstSelectName === 'Российских рублей') {
       // live example №1: 
+      // Почему когда переводим из рублей нам нужны SUM_OF_BASIC и MULTIPLICITY а когда в рубли не нужны?
       dispatch(result((SUM_OF_BASIC / secondValue * MULTIPLICITY / SUM_OF_BASIC) * input / MULTIPLICITY * secondNominal))
     } else if (secondSelectName === 'Российских рублей') {
       // convertation directly
@@ -161,6 +170,12 @@ export function count() {
     }
     // live example №2:
     else {
+      // очень непонятная формула. Понятно что тут перевод из 1 валюты в другую через курс рубля.
+      // Но как это отлаживать непонятно.
+      // Может что-то типа:
+      // currency1Rate = ...
+      // currancy2Rate = ...
+      // result = (value * currency1Rate) / currancy2Rate
       dispatch(result(input * MULTIPLICITY * (SUM_OF_BASIC / secondValue * MULTIPLICITY / SUM_OF_BASIC) * secondNominal / (MULTIPLICITY * (SUM_OF_BASIC / firstValue * MULTIPLICITY / SUM_OF_BASIC) * firstNominal)))
     }
   }

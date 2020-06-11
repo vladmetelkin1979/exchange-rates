@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
     valutes: state.readyApi.valutes
 })
 
+// Странно тут назначать propTypes а не в компоненте. Инкапсуляция нарушается.
 Wrapper.propTypes = {
     date: PropTypes.string,
     previousDate: PropTypes.string,

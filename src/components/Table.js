@@ -1,5 +1,7 @@
 import React from 'react'
 
+// Можно получить значения и потом их использовать
+// function Table({ previousDate, timestamp, CharCode, Nominal, Name, Value }) {
 function Table(props) {
     return (
         <div>
