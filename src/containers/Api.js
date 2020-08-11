@@ -22,6 +22,7 @@ const mapDispatchToProps = dispatch => ({
                     throw error
                 }
             })
+            // Зачем этот then. Тут в предыдущем then значение возвращается а не промис. Можно это сделать в предыдущем блоке
             .then((response) => {
                 if (typeof response !== 'object') {
                     let error = new Error('Получен недопустимый формат данных')

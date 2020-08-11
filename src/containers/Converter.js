@@ -20,6 +20,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+    // Думаю лучше тут принимать значение а не элемент DOM. экщен не должен знать про элементы DOM
     changeInput: (e) => {
         e.preventDefault()
         const validly = validationInput(e.target.value)
@@ -32,11 +33,11 @@ const mapDispatchToProps = (dispatch) => ({
         }
     },
     changeFirstOption: (e) => {
-        dispatch(firstSelect(e.target.value))
+        dispatch(firstSelect(e.target.value)) // Думаю лучше тут принимать значение а не элемент DOM. экщен не должен знать про элементы DOM
         dispatch(count())
     },
     changeSecondOption: (e) => {
-        dispatch(secondSelect(e.target.value))
+        dispatch(secondSelect(e.target.value)) // Думаю лучше тут принимать значение а не элемент DOM. экщен не должен знать про элементы DOM
         dispatch(count())
     }
 })
