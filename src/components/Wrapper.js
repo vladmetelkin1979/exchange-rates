@@ -7,6 +7,7 @@ const Wrapper = ({ getApi, date, previousDate, timestamp, valutes }) => {
   useEffect(() => {
     getApi()
   }, [getApi])
+  // Можно просто (valutes === undefined) или (!valutes)
   if (typeof valutes === 'undefined') {
     return (
       <div>
